@@ -1,0 +1,16 @@
+---
+- name: test
+  connection: local
+  vars:
+    resource_group_name: test
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Fetch image details
+      azure_rm_resource:
+        resource_group: "{{ resource_group_name }}"
+        provider: "Compute"
+        resource_type: galleries
+        resource_name: "/dtl_image_gallery/images/{{inventory_hostname}}"
+        method: GET
+        api_version: "2022-03-03"
